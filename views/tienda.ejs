@@ -1,0 +1,294 @@
+<%- include('./cabeceras/cab_tienda.ejs')%>
+
+<body onload="carritoUsuario()">
+    
+    <header>
+      <nav class="navbar navbar-expand-md navbar-light fixed-top bg-primary">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#"><img width="75" height="75" src="/img/LogoTS.png"></a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse " id="navbarCollapse">
+            <ul class="navbar-nav  ms-auto">
+              <li class="nav-item">
+                <a class="nav-link fs-5 mx-5 fw-bolder" href="http://localhost:3000/registro">Registrate</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link fs-5 mx-5 fw-bolder" href="">Nosotros</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link fs-5 mx-5 fw-bolder" href="">Contactanos</a>
+              </li>
+            </ul>
+            <button id="vercarrito" class="btn btn-dark mx-3 ms-auto" data-open='modalcarrito'><img src="/img/shopping-cart.png"></button>
+            <a id="eliminar" class="btn btn-danger mx-3" href="">Cerrar Sesion</a> 
+          </div>
+        </div>
+      </nav>
+      
+    </header>
+    
+    <main>
+    
+      <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+          <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+          <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+          <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        </div>
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img width="100%" height="100%" src="/img/autos_1.jpg" ></img>
+    
+            <div class="container">
+              <div class="carousel-caption text-start">
+                <h1>Encuentra el auto de tus sueños.</h1>
+                <p>Busca en nuestro catalogo el auto que mas atienda tus necesidades al mejor precio.</p>
+                <p><a class="btn btn-lg btn-primary" href="./login_demo.html">Registrate</a></p>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <img width="100%" height="100%" src="/img/autos_3.jpg" ></img>
+            <div class="container">
+              <div class="carousel-caption">
+                <h1>Todas las marcas.</h1>
+                <p>Cientos de marcas son las que puedes encontrar.</p>
+                <p><a class="btn btn-lg btn-primary" href="#">Saber mas</a></p>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <img width="100%" height="100%" src="/img/autos_2.jpg" ></img>
+    
+            <div class="container">
+              <div class="carousel-caption text-end">
+                <h1>Para todo tipo de necesidades.</h1>
+                <p>Desde autos deportivos hasta camionetas para trabajar, todo en un solo lugar.</p>
+                <p><a class="btn btn-lg btn-primary" href="">Explorar</a></p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+    
+      
+    
+      <div class="modal" id="modaltienda">
+        <div class="modal-dialog">
+    
+          <div class="modal-header">
+            <h3 id="carritotitle fw-bolder">Detalles del producto</h3>
+          </div>
+    
+          <div class="modal-content text-center" id="compras">
+            <h3></h3>
+          </div>
+          <div class="modal-content">  
+            <button id="carritofinal" class="btn btn-dark" type="button" onclick="agregarOrden()">Agregar a tu lista de deseos</button>
+          </div>
+    
+          <div class="modal-footer">
+           <div class="d-grid">
+              <button class="btn btn-dark" type="button ">Cerrar</button>
+           </div>
+          </div>
+    
+        </div>
+      </div>
+    
+      <div class="modal" id="modalcarrito">
+        <div class="modal-dialog">
+    
+          <div class="modal-header">
+            <h2 id="carritotitle fw-bolder">Lista de deseos</h2>
+          </div>
+    
+          <div class="modal-content text-center" id="comprafinal">
+            <h3>Lista  Vacia</h3>
+          </div>
+          <div class="modal-content">  
+            
+            <button id="compra" class="btn btn-danger" type="button">Guardar en carrito</button>
+            <a class="btn btn-dark my-2" id="carritoUsuario" href="" type="button">Ir a tu carrito</a>
+          </div>
+    
+          <div class="modal-footer">
+           <div class="d-grid">
+              <button class="btn btn-dark" type="button ">Cerrar</button>
+           </div>
+          </div>
+    
+        </div>
+      </div>
+    
+    
+      <!-- Marketing messaging and featurettes
+      ================================================== -->
+      <!-- Wrap the rest of the page in another container to center all the content. -->
+    
+      <div class="container marketing">
+    
+        <!-- Three columns of text below the carousel -->
+        
+        <!-- <section class="text-center container">
+          <div class="row py-lg-1">
+            <div class="col-lg-6 col-md-8 mx-auto">
+              <h1 class="fw-light">Encuentre el auto que necesitas</h1>
+              <form id="forma">
+                <input class="form-control my-2" id="searchc" type="search" placeholder="Search">
+                <button id="buscarCatalogo" class="btn btn-dark my-2 col-4" type="button">Buscar</button>
+              </form>
+            </div>
+          </div>
+        </section> -->
+        
+        <div class="row d-flex align-items-stretch">
+          <div class="col-lg-4">
+    
+            <img id="img1" class="bd-placeholder-img " width="150" height="150" src = "<%= link %>" role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#777"/></img>
+            <h3 id="producto1"><%= nombre %></h3>
+            <p style="display: none" id="txt1"><%= precio %></p>
+            <p style="display: none" id="modelo1"><%= modelo %></p>
+            <p style="display: none" id="vend1"><%= vendedor %></p>
+            <a id="boton1" class="btn btn-primary"  data-open='modaltienda' onclick="agregarCompra1()">Ver detalles &raquo;</a>
+    
+          </div><!-- /.col-lg-4 -->
+          <div class="col-lg-4">
+    
+            <img id="img2" class="bd-placeholder-img " width="150" height="150" src= "<%= link2 %>" role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#777"/></img>
+            <h3 id="producto2"><%= nombre2 %></h3>
+            <p style="display: none" id="txt2"><%= precio2 %></p>
+            <p style="display: none" id="modelo2"><%= modelo2 %></p>
+            <p style="display: none" id="vend2"><%= vendedor2 %></p>
+            <p><a id="boton2" class="btn btn-primary" data-open='modaltienda' onclick="agregarCompra2()">Ver detalles &raquo;</a></p>
+    
+          </div><!-- /.col-lg-4 -->
+          <div class="col-lg-4">
+    
+            <img id="img3" class="bd-placeholder-img" width="150" height="150" src="<%= link3 %>" role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#777"/></img>
+            <h3 id="producto3"><%= nombre3 %></h3>
+            <p style="display: none" id="txt3" ><%= precio3 %></p>
+            <p style="display: none" id="modelo3"><%= modelo3 %></p>
+            <p style="display: none" id="vend3"><%= vendedor3 %></p>    
+            <p><a id="boton3" class="btn btn-primary" data-open='modaltienda' onclick="agregarCompra3()">Ver detalles &raquo;</a></p>
+    
+          </div><!-- /.col-lg-4 -->
+        </div><!-- /.row -->
+    
+        <div class="row d-flex align-items-stretch">
+          <div class="col-lg-4">
+    
+            <img id="img4" class="bd-placeholder-img " width="150" height="150" src="<%= link4 %>" role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#777"/></img>
+            <h3 id="producto4"><%= nombre4 %></h3>
+            <p style="display: none" id="txt4"><%= precio4 %></p>
+            <p style="display: none" id="modelo4"><%= modelo4 %></p>
+            <p style="display: none" id="vend4"><%= vendedor4 %></p>
+            <p><a id="boton4" class="btn btn-primary"data-open='modaltienda' onclick="agregarCompra4()">Ver detalles &raquo;</a></p>
+            
+          </div><!-- /.col-lg-4 -->
+          <div class="col-lg-4">
+    
+            <img id="img5" class="bd-placeholder-img " width="150" height="150" src="<%= link5 %>" role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#777"/></img>
+            <h3 id="producto5"><%= nombre5 %></h3>
+            <p style="display: none" id="txt5"><%= precio5 %></p>
+            <p style="display: none" id="modelo5"><%= modelo5 %></p>
+            <p style="display: none" id="vend5"><%= vendedor5 %></p>
+            <p><a id="boton5" class="btn btn-primary" data-open='modaltienda' onclick="agregarCompra5()">Ver detalles &raquo;</a></p>
+          </div><!-- /.col-lg-4 -->
+          <div class="col-lg-4">
+    
+            <img id="img6" class="bd-placeholder-img" width="150" height="150" src="<%= link6 %>" role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#777"/></img>
+            <h3 id="producto6"><%= nombre6 %></h3>
+            <p style="display: none" id="txt6"><%= precio6 %></p>
+            <p style="display: none" id="modelo6"><%= modelo6 %></p>
+            <p style="display: none" id="vend6"><%= vendedor6 %></p>
+            <p><a id="boton6" class="btn btn-primary" data-open='modaltienda' onclick="agregarCompra6()">Ver detalles &raquo;</a></p>
+    
+          </div><!-- /.col-lg-4 -->
+        </div><!-- /.row -->
+    
+        <div class="row d-flex align-items-stretch">
+          <div class="col-lg-4">
+    
+            <img id="img7" class="bd-placeholder-img " width="150" height="150" src="<%= link7 %>" role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#777"/></img>
+            <h3 id="producto7"><%= nombre7 %></h3>
+            <p style="display: none" id="txt7"><%= precio7 %></p>
+            <p style="display: none" id="modelo7"><%= modelo7 %></p>
+            <p style="display: none" id="vend7"><%= vendedor7 %></p>
+            <a id="boton7" class="btn btn-primary"  data-open='modaltienda' onclick="agregarCompra7()">Ver detalles &raquo;</a>
+    
+          </div><!-- /.col-lg-4 -->
+          <div class="col-lg-4">
+    
+            <img id="img8" class="bd-placeholder-img " width="150" height="150" src="<%= link8 %>" role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#777"/></img>
+            <h3 id="producto8"><%= nombre8 %></h3>
+            <p style="display: none" id="txt8"><%= precio8 %></p>
+            <p style="display: none" id="modelo8"><%= modelo8 %></p>
+            <p style="display: none" id="vend8"><%= vendedor8 %></p>
+            <p><a id="boton8" class="btn btn-primary" data-open='modaltienda' onclick="agregarCompra7()">Ver detalles &raquo;</a></p>
+    
+          </div><!-- /.col-lg-4 -->
+          <div class="col-lg-4">
+    
+            <img id="img9" class="bd-placeholder-img" width="150" height="150" src="<%= link9 %>" role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#777"/></img>
+            <h3 id="producto9"><%= nombre9 %></h3>
+            <p style="display: none" id="txt9" ><%= precio9 %></p>
+            <p style="display: none" id="modelo9"><%= modelo9 %></p>
+            <p style="display: none" id="vend9"><%= vendedor9 %></p>    
+            <p><a id="boton9" class="btn btn-primary" data-open='modaltienda' onclick="agregarCompra9()">Ver detalles &raquo;</a></p>
+    
+          </div><!-- /.col-lg-4 -->
+        </div><!-- /.row -->
+    
+    
+        <!-- START THE FEATURETTES -->
+    
+        <!-- <p><a class="btn btn-primary"onclick="crearCatalogo()">Crear Catalogo&raquo;</a></p> -->
+    
+        <hr class="featurette-divider">
+    
+        <div><h2 class="text-center fs-1 mb-5">Tenemos las mejores marcas</h2></div>
+    
+        <div class="row">
+          <div class="col-lg-4"><img width="200px" height="200px" src="/img/nissan.png"></img></div>
+          <div class="col-lg-4"><img width="300px" height="200px" src="/img/chevrolet.png"></img></div>
+          <div class="col-lg-4"><img width="300px" height="200px" src="/img/volkswagen.png"></img></div>
+        </div>
+      
+    
+        <hr class="featurette-divider">
+    
+        <!-- /END THE FEATURETTES -->
+    
+      </div><!-- /.container -->
+    
+      
+    
+      <!-- FOOTER -->
+      <footer class="container">
+        <p class="float-end"><a href="#">Back to top</a></p>
+        <p>&copy; 2017–2021 Tecla Shop Company, Inc. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
+      </footer>
+    </main>
+    
+    
+        <script src="/js/bootstrap.bundle.min.js"></script>
+        <script src="/js/app.js"></script>
+        <script src="/js/scrips.js"></script>
+        <script src="/js/carrito.js"></script>
+    
+    
+          
+      </body>
+    </html>
+    
